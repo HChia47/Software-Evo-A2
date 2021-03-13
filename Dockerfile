@@ -19,6 +19,12 @@ RUN rm -rf jquery_releases.csv
 # Otherwise you will need to download all versions of jQuery everytime you add new 
 # steps. 
 
+WORKDIR /
+
+ADD requirements.txt /
+
+RUN pip install -r requirements.txt
+
 WORKDIR /usr
 
 COPY jsinspect jsinspect
@@ -28,6 +34,8 @@ RUN npm install -g ./jsinspect
 WORKDIR /usr
 
 COPY manual manual
+
+COPY scripts scripts
 
 # Increase the amount of memory nodejs can allocate, this
 # prevents JsInspect from running into the GC issues. 
