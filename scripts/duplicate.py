@@ -7,7 +7,7 @@ import subprocess as sp
 # get JsInspect command on only the src to retrieve json file
 def getJsInspectBetween2Versions(version1, version2):
   output = sp.getoutput(f'jsinspect ' + str(version1) +"/src "+str(version2) +"/src" + f' -I -L -r json --ignore "intro.js$|outro.js$|Test.js$|sizzle"')
-  print(f'jsinspect ' + str(versionList[0]) +"/src "+str(versionList[1]) +"/src" + f' -I -L -r json --ignore "intro.js$|outro.js$|Test.js$|sizzle"')
+  #print(f'jsinspect ' + str(versionList[0]) +"/src "+str(versionList[1]) +"/src" + f' -I -L -r json --ignore "intro.js$|outro.js$|Test.js$|sizzle"')
   duplicateJson = json.loads(output)
   #print(duplicateJson)
   return duplicateJson
@@ -42,6 +42,7 @@ def duplicateCodeLinesBetween2Versions(version1, version2):
       totalLinesOfCode = totalLinesOfCode + 1
   return totalLinesOfCode
 
+# get all data list needed
 dataFrame = pd.read_csv("/out/lineData.csv")
 versionList = dataFrame['version'].tolist()
 blankList = dataFrame['blank'].tolist()
@@ -53,6 +54,7 @@ for x, y, z in zip(blankList, commentList, codeList):
     allCodeAddedList.append(xyz)
 
 
+#makes pair of all versions and calculates similirity metric and total amount of codes.
 i = 0
 j = 0
 completeVersionListDuplicates = []
@@ -74,12 +76,14 @@ while i < len(versionList):
       completeSimList.append(simListDuplicate)
       print(versionListDuplicates)
       print(simListDuplicate)
-      print(completeVersionListDuplicates)
-      print(completeSimList)
+      #print(completeVersionListDuplicates)
+      #print(completeSimList)
     j += 1
   i += 1
   j = 0
 print(completeVersionListDuplicates)
+
+#create 2 csv list with one having the pair of versions and total amount of duplicate  and the other the pair and ssimilarity metric score.
 dataFrame = pd.DataFrame(completeVersionListDuplicates, columns = ["version", "versionCompare", "DuplicatedCodeTotal"])
 dataFrame.to_csv("/out/linesOfDuplicatedCodeList.csv", index = False)
 dataFrame = pd.DataFrame(completeSimList, columns = ["version", "versionCompare", "SimScore"])
