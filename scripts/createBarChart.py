@@ -16,7 +16,6 @@ def createBarChart(vList, dList, title):
 dataFrame = pd.read_csv("/out/lineData.csv")
 print(dataFrame)
 versionList = dataFrame['version'].tolist()
-filesList = dataFrame['files'].tolist()
 blankList = dataFrame['blank'].tolist()
 commentList = dataFrame['comment'].tolist()
 codeList = dataFrame['code'].tolist()
@@ -24,7 +23,6 @@ allCodeAddedList = []
 for x, y, z in zip(blankList, commentList, codeList):
     xyz = x + y + z
     allCodeAddedList.append(xyz)
-createBarChart(versionList, filesList, "files")
 createBarChart(versionList, allCodeAddedList, "code")
 print(allCodeAddedList)
 print(versionList)
