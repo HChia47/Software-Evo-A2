@@ -4,7 +4,7 @@ import pandas as pd
 import subprocess
 
 def countLineOfRelease(directory):
-    output = subprocess.check_output(["cloc", "--quiet", "--csv", "{}/src".format(directory)])
+    output = subprocess.check_output(["cloc", "--include-lang=JavaScript", '--not-match-f="Test.js$|intro.js$|outro.js$"' '--not-match-d="sizzle"', "--quiet", "--csv", "{}/src".format(directory)])
     print(output)
     splitOutput = output.splitlines()
     lastLine = splitOutput[-1]
