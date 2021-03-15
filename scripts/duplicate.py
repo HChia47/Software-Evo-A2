@@ -44,7 +44,6 @@ def duplicateCodeLinesBetween2Versions(version1, version2):
 
 dataFrame = pd.read_csv("/out/lineData.csv")
 versionList = dataFrame['version'].tolist()
-filesList = dataFrame['files'].tolist()
 blankList = dataFrame['blank'].tolist()
 commentList = dataFrame['comment'].tolist()
 codeList = dataFrame['code'].tolist()
