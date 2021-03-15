@@ -6,7 +6,7 @@ import subprocess as sp
 
 # get JsInspect command on only the src to retrieve json file
 def getJsInspectBetween2Versions(version1, version2):
-  output = sp.getoutput(f'jsinspect ' + str(version1) +"/src "+str(version2) +"/src" + f' -I -L -r json --ignore "intro.js$|outro.js$|Test.js$|sizzle')
+  output = sp.getoutput(f'jsinspect ' + str(version1) +"/src "+str(version2) +"/src" + f' -I -L -r json --ignore "intro.js$|outro.js$|Test.js$|sizzle"')
   print(f'jsinspect ' + str(versionList[0]) +"/src "+str(versionList[1]) +"/src" + f' -I -L -r json --ignore "intro.js$|outro.js$|Test.js$|sizzle"')
   duplicateJson = json.loads(output)
   #print(duplicateJson)
